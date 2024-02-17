@@ -22,6 +22,9 @@ Results folder:              Contains the above mentioned .rda files and all plo
 
 ### References for the real data analyses
 
+T. B. Berrett, Y. Wang, R. F. Barber, and R. J. Samworth. The conditional permutation test for independence while controlling for
+confounders. Journal of the Royal Statistical Society Series B: Statistical Methodology, 82(1):175-197, 2020.
+
 P. Ding. A paradox from randomization-based causal inference. Statistical Science, pages 331-345, 2017.
 
 P. Grünwald, A. Henzi, and T. Lardy. Anytime-valid tests of conditional independence under model-X. Journal of the American Statistical
