@@ -20,7 +20,7 @@ Real_data_CRT.R:             Real data analysis described in Section 6.5. The pa
 
 Results folder:              Contains the above mentioned .rda files and all plots shown in the paper.
 
-#References for the real data analyses
+### References for the real data analyses
 
 P. Ding. A paradox from randomization-based causal inference. Statistical Science, pages 331-345, 2017.
 
