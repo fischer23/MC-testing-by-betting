@@ -127,13 +127,13 @@ ggsave("results/Plot_power_alpha005.pdf",plot=combined, width=12, height=7.5)
 
 #####Figure 3 (alpha=0.01)
 
-load("power_alpha001.rda")
+load("results/power_alpha001.rda")
 B=1000
 
 lab=c("Permutation p-value", "Aggressive", "Binomial", "Besag-Clifford", "Binomial mixture") 
 col=c( "cornflowerblue","red", "limegreen", "cornflowerblue", "orange")
 
-results_df=data.frame(idx=mus,power_perm=power_perm, power_bin=power_bin, power_agg=power_agg, power_bc=power_bc, power_bm=power_bm,
+results_df=data.frame(idx=mus, power_bin=power_bin, power_agg=power_agg, power_bc=power_bc, power_bm=power_bm,
                       nPerm=nPerm, nPerm_agg=nPerm_agg, nPerm_rej=nPerm_rej,
                       nPerm_stop=nPerm_stop, nPerm_agg_rej=nPerm_agg_rej, nPerm_agg_stop=nPerm_agg_stop,
                       nPerm_bc=nPerm_bc, nPerm_stop_bc=nPerm_stop_bc, nPerm_rej_bc=nPerm_rej_bc,
