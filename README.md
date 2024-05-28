@@ -1,6 +1,6 @@
 # MC-testing-by-betting
 
-This repository contains the R code for reproducing the results in the paper "Sequential Monte-Carlo testing by betting" (https://arxiv.org/abs/2401.07365). In the aforementioned paper, we introduced an anytime-valid Monte-Carlo test, where the observed data is fixed and additional datasets are generated one by one over time such that computational resources can be saved by stopping early if the evidence for or against the null hypothesis is strong. The folder "Multiple testin" contains the R code for reproducing the results of the follow up paper "Multiple testing with anytime-valid Monte-Carlo p-values" (https://arxiv.org/abs/2404.15586).
+This repository contains the R code for reproducing the results in the paper "Sequential Monte-Carlo testing by betting" (https://arxiv.org/abs/2401.07365). In the aforementioned paper, we introduced an anytime-valid Monte-Carlo test, where the observed data is fixed and additional datasets are generated one by one over time such that computational resources can be saved by stopping early if the evidence for or against the null hypothesis is strong. The folder "Multiple testing" contains the R code for reproducing the results of the follow up paper "Multiple testing with anytime-valid Monte-Carlo p-values" (https://arxiv.org/abs/2404.15586).
 
 Files:
 
