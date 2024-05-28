@@ -20,6 +20,8 @@ Real_data_CRT.R:             Real data analysis described in Section 6.5. The pa
 
 Results folder:              Contains the above mentioned .rda files and all plots shown in the paper.
 
+Multiple testing folder:     Contains the code for the follow up paper "Multiple testing with anytime-valid Monte-Carlo p-values".
+
 ### References for the real data analyses
 
 T. B. Berrett, Y. Wang, R. F. Barber, and R. J. Samworth. The conditional permutation test for independence while controlling for
