@@ -16,7 +16,8 @@ X=c(rep(1,18), rep(0,14), rep(1,5), rep(0,16))
 
 
 test_stat=mean(X[treatment==1])-mean(X[treatment==0])     #Observed test statistic
-B=5000                    #Number of permutations
+B=5000                    #Maximum number of permutations
+B_perm=200                #Number of permutations for the permutation p-value
 m=1000                    #Number of runs
 
 p_perm=rep(0,m)           #permutation p-values
@@ -72,7 +73,7 @@ for(b in (1:B)){
 
 #Calculating p-values and decisions
 
-p_perm[k]=(1+sum(test_stat_perm[1:B]>=test_stat))/(B+1)
+p_perm[k]=(1+sum(test_stat_perm[1:B_perm]>=test_stat))/(B_perm+1)
 dec_perm[k]=ifelse(p_perm[k]<=alpha,1,0)
 
 p_bin[k]=1/max(wealth_bin)
