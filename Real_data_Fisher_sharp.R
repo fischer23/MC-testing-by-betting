@@ -1,4 +1,4 @@
-#Reproduces the results of Section 6.4 in the paper "Sequential Monte-Carlo testing by betting"
+#Reproduces the results of Section 7.4 in the paper "Sequential Monte-Carlo testing by betting"
 #In particular, generates plots for Figure 6.
 
 rm(list=ls())
