@@ -13,9 +13,9 @@ Pval_generate_data.R:        Calculates the p-values required for reproducing th
 
 Plot_generator.R:            Uses the .rda files created by "Power_nperm_generate_data.R" and "Pval_generate_data.R" to generate Figures 1,2,3,4,5,7,8.
 
-Real_data_Fisher_sharp.R:    Real data analysis described in Section 6.4. Generates plots for Figure 6 and saves them in the result folder (files "Plot_wealth_upper.pdf" and                               "plot_wealth_lower.pdf"). The same data was analyzed by Rosenbaum (2002) and Ding (2017).
+Real_data_Fisher_sharp.R:    Real data analysis described in Section 7.4. Generates plots for Figure 6 and saves them in the result folder (files "Plot_wealth_upper.pdf" and                               "plot_wealth_lower.pdf"). The same data was analyzed by Rosenbaum (2002) and Ding (2017).
 
-Real_data_CRT.R:             Real data analysis described in Section 6.5. The part of the code used to generate the test statistics was copied from the supplementary material of Grünwald et al. (2023). In the code, we explicitly make clear which part was copied. The dataset is available at 
+Real_data_CRT.R:             Real data analysis described in Section 7.5. The part of the code used to generate the test statistics was copied from the supplementary material of Grünwald et al. (2023). In the code, we explicitly make clear which part was copied. The dataset is available at 
                              https://ride.capitalbikeshare.com/system-data .
 
 Results folder:              Contains the above mentioned .rda files and all plots shown in the paper.
