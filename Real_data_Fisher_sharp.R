@@ -19,21 +19,27 @@ test_stat=mean(X[treatment==1])-mean(X[treatment==0])     #Observed test statist
 B=5000                    #Maximum number of permutations
 B_perm=200                #Number of permutations for the permutation p-value
 m=1000                    #Number of runs
+alpha=0.05                #Significance level
+c=0.95*alpha              #Parameter for binomial mixture strategy
+p_zero=1/ceiling(sqrt(2*pi*exp(1/6))/alpha)       #Parameter for binomial strategy
+h=8                       #Parameter for the Besag-Clifford strategy
+B_bc=h/alpha              #Maximum number of permutations for the Besag-Clifford strategy
 
 p_perm=rep(0,m)           #permutation p-values
 p_bin=rep(0,m)            #p-values binomial strategy
 p_bm=rep(0,m)             #p-values binomial mixture strategy
+p_bc=rep(0,m)             #p-values Besag-Clifford method
 idx_dec=rep(B,m)          #Indices decisions binomial strategy 
 dec_bin=rep(0,m)          #Decisions binomial strategy 
 idx_dec_bm=rep(B,m)       #Indices decisions binomial mixture strategy      
+idx_dec_bc=rep(B_bc,m)       #Indices decisions Besag-Clifford method
 dec_bm=rep(0,m)           #Decisions binomial mixture strategy 
 dec_perm=rep(0,m)         #Decisions permutation p-value
+dec_bc=rep(0,m)           #Decisions Besag-Clifford method 
 
 myplots=vector('list', m) #Plots of wealth processes 
 
-alpha=0.05                #Significance level
-c=0.95*alpha              #Parameter for binomial mixture strategy
-p_zero=1/ceiling(sqrt(2*pi*exp(1/6))/alpha)       #Parameter for binomial strategy
+
 
 
 for(k in 1:m){
@@ -44,6 +50,8 @@ bet_bin=c()
 rank=1                  #Rank of the observed test statistic
 wealth_bin=c(1)
 wealth_bm=c()
+
+
 
 for(b in (1:B)){
   X_perm=sample(X)
@@ -68,6 +76,14 @@ for(b in (1:B)){
   if(max(wealth_bm)>=(1/alpha)&idx_dec_bm[k]==B){
     idx_dec_bm[k]=b
   }
+  
+  if((rank-1)==h & b<B_bc & idx_dec_bc[k]==B_bc){
+    dec_bc[k]=-1
+    idx_dec_bc[k]=b
+  }else if(b==B_bc & idx_dec_bc[k]==B_bc){
+    idx_dec_bc[k]=b
+    dec_bc[k]=1
+  } 
   
 }
 
@@ -121,6 +137,10 @@ median(idx_dec)
 power_p_bm=mean(dec_bm>0)
 mean(idx_dec_bm)
 median(idx_dec_bm)
+
+power_p_bc=mean(dec_bc>0)
+mean(idx_dec_bc)
+median(idx_dec_bc)
 
 #Choose specific plots with different wealth behavior
 p1=(myplots[[m]]+myplots[[5]] & theme(legend.position = "bottom"))+plot_layout(guides="collect")
