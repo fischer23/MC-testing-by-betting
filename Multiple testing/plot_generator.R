@@ -290,6 +290,10 @@ ggsave("results/Plot_power_all.pdf",plot=combined, width=14, height=18)
 #####Different rhos
 load("results/Plot_FDR_rhos.rda")
 
+lab=c("Aggressive", "Anytime-valid BC", "Permutation p-value", "Permutation p-value (B=200)", "Binomial mixture")
+col=c("cornflowerblue", "purple", "red", "limegreen", "orange", "aquamarine")
+
+
 results_df_5=data.frame(idx_5=c(0,0.1,0.3,0.5,0.7,0.9), FDR_BH=FDR_BH, FDR_BH_smallB=FDR_BH_smallB,
                         FDR_bm=FDR_bm,FDR_bc=FDR_bc,FDR_agg=FDR_agg)
 
@@ -306,12 +310,12 @@ p9=ggplot(results_df_5, aes(idx_5)) +
   geom_point(aes(y = FDR_bm,colour = "5",shape = "5")) +
   scale_linetype_manual(guide="none", values = c("3"="solid","4"="dashed","5"="dotted"))+
   scale_shape_manual(name="Strategy", values=c( "1"=6, "2"=3, "3"=0, "4"=8, "5"=1, "6"=4), 
-                     labels=c("1"=lab[1], "2"=lab[2], "3"=lab[3], "4"=lab[4], "5"=lab[5], "6"=lab[6]))+
+                     labels=c("1"=lab[3], "2"=lab[4], "3"=lab[1], "4"=lab[2], "5"=lab[5]))+
   scale_colour_manual(name="Strategy", values=c( "1"=col[1], "2"=col[2], "3"=col[3], "4"=col[4], "5"=col[5], "6"=col[6]), 
-                      labels=c("1"=lab[1], "2"=lab[2], "3"=lab[3], "4"=lab[4], "5"=lab[5], "6"=lab[6]))+
+                      labels=c("1"=lab[3], "2"=lab[4], "3"=lab[1], "4"=lab[2], "5"=lab[5]))+
   xlab(expression(rho))+
   ylab("FDR")+
-  scale_x_continuous(breaks = seq(0.2, 0.8, 0.2), limits=c(0, 0.9), expand = c(0, 0)) +
+  scale_x_continuous(breaks = c(0.1,0.3,0.5,0.7), limits=c(0, 0.9), expand = c(0, 0)) +
   scale_y_continuous(breaks = seq(0, 0.14, 0.02), limits=c(0, 0.15), expand = c(0, 0)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
