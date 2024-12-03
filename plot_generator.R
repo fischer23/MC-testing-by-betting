@@ -1,6 +1,4 @@
-#Generates Figures 1,2,3,4,5,7,8 of the paper "Sequential Monte-Carlo testing by betting"
-
-rm(list=ls())
+#Generates Figures 1,2,3,4,5,6,8 of the paper "Sequential Monte-Carlo testing by betting"
 
 library(ggplot2)
 library(patchwork)
@@ -422,7 +420,7 @@ load("results/power_alpha001.rda")
 B=1000
 alpha=0.01
 
-results_df=data.frame(idx=mus,power_bc=power_bc, power_bin=power_bin_r, power_bm_r=power_bm_r, power_agg=power_agg)
+results_df=data.frame(idx=mus,power_bc=power_bc, power_bin_r=power_bin_r, power_bm_r=power_bm_r, power_agg=power_agg)
 
 p2=ggplot(results_df, aes(idx)) + 
   geom_line(aes(y = power_bin_r,colour = "3", linetype="3")) +
@@ -455,30 +453,30 @@ combined <- p1 + p2 + plot_layout(guides = "collect") & theme(legend.position = 
 ggsave("results/Plot_power_randomized.pdf",plot=combined, width=12, height=4.5)
 
 
-#####Figure 7 (Power and number of permutations calibrated strategies)
+#####Figure 6 (randomized binomial mixture vs. Besag-Clifford with small T)
+
 
 load("results/power_alpha005.rda")
 
-lab=c("Permutation p-value", "Aggressive strategy", "Binomial", "Besag-Clifford", "Calibration strategy 1", "Calibration strategy 2" )
-col=c("cornflowerblue","red", "limegreen", "cornflowerblue", "pink", "purple")
+lab=c("Permutation p-value", "Aggressive", "Binomial", "Besag-Clifford", "Binomial mixture randomized") 
+col=c( "cornflowerblue","red", "limegreen", "cornflowerblue", "orange")
 
-results_df=data.frame(idx=mus, power_bin=power_bin,  power_cal=power_cal,power_cal_2=power_cal_2,
-                      nPerm=nPerm, nPerm_cal=nPerm_cal, nPerm_cal_2=nPerm_cal_2)
+results_df=data.frame(idx=mus, power_bm_r=power_bm_r, power_bc_smallB=power_bc_smallB, 
+                      nPerm_bm=nPerm_bm, nPerm_bc_smallB=nPerm_bc_smallB)
 
 p1=ggplot(results_df, aes(idx)) + 
-  geom_line(aes(y = power_bin,colour = "3", linetype="3")) +
-  geom_point(aes(y = power_bin,colour = "3",shape = "3")) +
-  geom_line(aes(y = power_cal,colour = "5", linetype="3")) +
-  geom_point(aes(y = power_cal,colour = "5",shape = "5")) +
-  geom_line(aes(y = power_cal_2,colour = "6", linetype="3")) +
-  geom_point(aes(y = power_cal_2,colour = "6",shape = "6")) +
+  geom_line(aes(y = power_bm_r,colour = "5", linetype="3")) +
+  geom_point(aes(y = power_bm_r,colour = "5",shape = "5")) +
+  geom_line(aes(y = power_bc_smallB,colour = "4", linetype="3")) +
+  geom_point(aes(y = power_bc_smallB,colour = "4",shape = "4")) +
   scale_linetype_manual(guide="none", values = c("3"="solid","4"="dashed","5"="dotted"))+
-  scale_shape_manual(name="Strategy", values=c( "3"=6, "5"=0, "6"=8), 
-                     labels=c("3"=lab[3], "5"=lab[5], "6"=lab[6]))+
-  scale_colour_manual(name="Strategy", values=c( "3"=col[3], "5"=col[5], "6"=col[6]), 
-                      labels=c("3"=lab[3], "5"=lab[5], "6"=lab[6]))+
+  scale_shape_manual(name="Strategy", values=c( "3"=6, "2"=0, "4"=8, "5"=1), 
+                     labels=c("3"=lab[3], "2"=lab[2], "4"=lab[4], "5"=lab[5]))+
+  scale_colour_manual(name="Strategy", values=c( "3"=col[3], "2"=col[2], "4"=col[4], "5"=col[5]), 
+                      labels=c("3"=lab[3], "2"=lab[2], "4"=lab[4], "5"=lab[5]))+
   xlab(bquote(mu))+
   ylab("Power")+
+  ggtitle(bquote(alpha==0.05))+
   scale_x_continuous(breaks = seq(0.05,0.45,0.05), limits=c(0,0.5),expand = c(0, 0))+
   scale_y_continuous(breaks = seq(0,1,0.1), limits=c(0,1.05),expand = c(0, 0))+
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
@@ -489,21 +487,45 @@ p1=ggplot(results_df, aes(idx)) +
 
 
 p2=ggplot(results_df, aes(idx)) + 
-  geom_line(aes(y = nPerm,colour = "3", linetype="3")) +
-  geom_point(aes(y = nPerm,colour = "3",shape = "3")) +
-  geom_line(aes(y = nPerm_cal,colour = "5", linetype="3")) +
-  geom_point(aes(y = nPerm_cal,colour = "5",shape = "5")) +
-  geom_line(aes(y = nPerm_cal_2,colour = "6", linetype="3")) +
-  geom_point(aes(y = nPerm_cal_2,colour = "6",shape = "6")) +
+  geom_line(aes(y = nPerm_bm,colour = "5", linetype="3")) +
+  geom_point(aes(y = nPerm_bm,colour = "5",shape = "5")) +
+  geom_line(aes(y = nPerm_bc_smallB,colour = "4", linetype="3")) +
+  geom_point(aes(y = nPerm_bc_smallB,colour = "4",shape = "4")) +
   scale_linetype_manual(guide="none", values = c("3"="solid","4"="dashed","5"="dotted"))+
-  scale_shape_manual(name="Strategy", values=c( "3"=6, "5"=0, "6"=8), 
-                     labels=c("3"=lab[3], "5"=lab[5], "6"=lab[6]))+
-  scale_colour_manual(name="Strategy", values=c( "3"=col[3], "5"=col[5], "6"=col[6]), 
-                      labels=c("3"=lab[3], "5"=lab[5], "6"=lab[6]))+
+  scale_shape_manual(name="Strategy", values=c( "3"=6, "2"=0, "4"=8, "5"=1), 
+                     labels=c("3"=lab[3], "2"=lab[2], "4"=lab[4], "5"=lab[5]))+
+  scale_colour_manual(name="Strategy", values=c( "3"=col[3], "2"=col[2], "4"=col[4], "5"=col[5]), 
+                      labels=c("3"=lab[3], "2"=lab[2], "4"=lab[4], "5"=lab[5]))+
   xlab(bquote(mu))+
+  ggtitle(bquote(alpha==0.05))+
   ylab("Total #permutations")+
   scale_x_continuous(breaks = seq(0.05,0.45,0.05), limits=c(0,0.5),expand = c(0, 0))+
-  scale_y_continuous(breaks = seq(0,B,100), limits=c(0,B),expand = c(0, 0))+
+  scale_y_continuous(breaks = seq(0,200,200/5), limits=c(0,(200+200/20)),expand = c(0, 0))+
+  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(colour = "black", fill=NA, size=1), 
+        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
+        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+
+load("results/power_alpha001.rda")
+results_df=data.frame(idx=mus, power_bm_r=power_bm_r, power_bc_smallB=power_bc_smallB, 
+                      nPerm_bm=nPerm_bm, nPerm_bc_smallB=nPerm_bc_smallB)
+
+p3=ggplot(results_df, aes(idx)) + 
+  geom_line(aes(y = power_bm_r,colour = "5", linetype="3")) +
+  geom_point(aes(y = power_bm_r,colour = "5",shape = "5")) +
+  geom_line(aes(y = power_bc_smallB,colour = "4", linetype="3")) +
+  geom_point(aes(y = power_bc_smallB,colour = "4",shape = "4")) +
+  scale_linetype_manual(guide="none", values = c("3"="solid","4"="dashed","5"="dotted"))+
+  scale_shape_manual(name="Strategy", values=c( "3"=6, "2"=0, "4"=8, "5"=1), 
+                     labels=c("3"=lab[3], "2"=lab[2], "4"=lab[4], "5"=lab[5]))+
+  scale_colour_manual(name="Strategy", values=c( "3"=col[3], "2"=col[2], "4"=col[4], "5"=col[5]), 
+                      labels=c("3"=lab[3], "2"=lab[2], "4"=lab[4], "5"=lab[5]))+
+  xlab(bquote(mu))+
+  ggtitle(bquote(alpha==0.01))+
+  ylab("Power")+
+  scale_x_continuous(breaks = seq(0.05,0.45,0.05), limits=c(0,0.5),expand = c(0, 0))+
+  scale_y_continuous(breaks = seq(0,1,0.1), limits=c(0,1.05),expand = c(0, 0))+
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
@@ -511,11 +533,116 @@ p2=ggplot(results_df, aes(idx)) +
         legend.text=element_text(size=15), legend.title=element_text(size=15)) 
 
 
-combined <- p1 + p2 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
+p4=ggplot(results_df, aes(idx)) + 
+  geom_line(aes(y = nPerm_bm,colour = "5", linetype="3")) +
+  geom_point(aes(y = nPerm_bm,colour = "5",shape = "5")) +
+  geom_line(aes(y = nPerm_bc_smallB,colour = "4", linetype="3")) +
+  geom_point(aes(y = nPerm_bc_smallB,colour = "4",shape = "4")) +
+  scale_linetype_manual(guide="none", values = c("3"="solid","4"="dashed","5"="dotted"))+
+  scale_shape_manual(name="Strategy", values=c( "3"=6, "2"=0, "4"=8, "5"=1), 
+                     labels=c("3"=lab[3], "2"=lab[2], "4"=lab[4], "5"=lab[5]))+
+  scale_colour_manual(name="Strategy", values=c( "3"=col[3], "2"=col[2], "4"=col[4], "5"=col[5]), 
+                      labels=c("3"=lab[3], "2"=lab[2], "4"=lab[4], "5"=lab[5]))+
+  xlab(bquote(mu))+
+  ggtitle(bquote(alpha==0.01))+
+  ylab("Total #permutations")+
+  scale_x_continuous(breaks = seq(0.05,0.45,0.05), limits=c(0,0.5),expand = c(0, 0))+
+  scale_y_continuous(breaks = seq(0,400,400/5), limits=c(0,(400+400/20)),expand = c(0, 0))+
+  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(colour = "black", fill=NA, size=1), 
+        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
+        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
 
+combined <- p1 + p2 + p3 + p4 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
 
-ggsave("results/Plot_power_calibrated.pdf",plot=combined, width=12, height=4.5)
+ggsave("results/Plot_power_sameT.pdf",plot=combined, width=12, height=7.5)
 
+# load("results/power_sameT.rda")
+# 
+# 
+# col=c("orange", "cornflowerblue")
+# shapes=c(1, 8)
+# 
+# colnames(results_df)[colnames(results_df) == "labs"] = "Strategy"
+# 
+# p1=ggplot(results_df[(results_df$alphas==0.05 & results_df$c_factors==0.9 & 
+#                         results_df$futility_stop_powers==1 & results_df$types=="Power"),], aes(x=mus, y=values)) + 
+#   geom_line(aes(colour = Strategy)) +
+#   geom_point(aes(colour = Strategy, shape = Strategy)) +
+#   scale_colour_manual(values=col)+
+#   scale_shape_manual(values=shapes)+
+#   xlab(bquote(mu))+
+#   ylab("Power")+
+#   ggtitle(expression(alpha == 0.05))+
+#   scale_x_continuous(breaks = seq(0.05,0.45,0.05), limits=c(0,0.5),expand = c(0, 0))+
+#   scale_y_continuous(breaks = seq(0,1,0.2), limits=c(0,1.05),expand = c(0, 0))+
+#   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
+#         panel.grid.minor = element_blank(),
+#         panel.border = element_rect(colour = "black", fill=NA, size=1), 
+#         axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
+#         legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+# 
+# 
+# p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$c_factors==0.9 & 
+#                         results_df$futility_stop_powers==1 & results_df$types=="Total #permutations"),], 
+#           aes(x=mus, y=values)) + 
+#   geom_line(aes(colour = Strategy)) +
+#   geom_point(aes(colour = Strategy, shape = Strategy)) +
+#   scale_colour_manual(values=col)+
+#   scale_shape_manual(values=shapes)+
+#   xlab(bquote(mu))+
+#   ylab("Total #permutations")+
+#   ggtitle(expression(alpha == 0.05))+
+#   scale_x_continuous(breaks = seq(0.05,0.45,0.05), limits=c(0,0.5),expand = c(0, 0))+
+#   scale_y_continuous(breaks = seq(0,200,200/5), limits=c(0,(200+200/20)),expand = c(0, 0))+
+#   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
+#         panel.grid.minor = element_blank(),
+#         panel.border = element_rect(colour = "black", fill=NA, size=1), 
+#         axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
+#         legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+# 
+# 
+# p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$c_factors==0.9 & 
+#                         results_df$futility_stop_powers==1 & results_df$types=="Power"),], aes(x=mus, y=values)) + 
+#   geom_line(aes(colour = Strategy)) +
+#   geom_point(aes(colour = Strategy, shape = Strategy)) +
+#   scale_colour_manual(values=col)+
+#   scale_shape_manual(values=shapes)+
+#   xlab(bquote(mu))+
+#   ylab("Power")+
+#   ggtitle(expression(alpha == 0.01))+
+#   scale_x_continuous(breaks = seq(0.05,0.45,0.05), limits=c(0,0.5),expand = c(0, 0))+
+#   scale_y_continuous(breaks = seq(0,1,0.2), limits=c(0,1.05),expand = c(0, 0))+
+#   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
+#         panel.grid.minor = element_blank(),
+#         panel.border = element_rect(colour = "black", fill=NA, size=1), 
+#         axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
+#         legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+# 
+# 
+# p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$c_factors==0.9 & 
+#                         results_df$futility_stop_powers==1 & results_df$types=="Total #permutations"),], 
+#           aes(x=mus, y=values)) + 
+#   geom_line(aes(colour = Strategy)) +
+#   geom_point(aes(colour = Strategy, shape = Strategy)) +
+#   scale_colour_manual(values=col)+
+#   scale_shape_manual(values=shapes)+
+#   xlab(bquote(mu))+
+#   ylab("Total #permutations")+
+#   ggtitle(expression(alpha == 0.01))+
+#   scale_x_continuous(breaks = seq(0.05,0.45,0.05), limits=c(0,0.5),expand = c(0, 0))+
+#   scale_y_continuous(breaks = seq(0,400,400/5), limits=c(0,(400+400/20)),expand = c(0, 0))+
+#   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
+#         panel.grid.minor = element_blank(),
+#         panel.border = element_rect(colour = "black", fill=NA, size=1), 
+#         axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
+#         legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+# 
+# 
+# combined = p1 + p2 + p3 + p4 + plot_layout(guides = "collect", ncol = 2) & theme(legend.position = "bottom")
+# 
+# ggsave("results/plot_power_sameT.pdf", plot=combined, width=12, height=7.5)
 
 
 #######################Plots with logarithmic p-values
