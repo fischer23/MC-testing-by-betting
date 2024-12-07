@@ -1,4 +1,4 @@
-#R Code for generating the data of the Figures 2,3,4,5,6 in the paper "Sequential Monte-Carlo testing by betting"
+#R Code for generating the data of the Figures 2,3,4,5 in the paper "Sequential Monte-Carlo testing by betting"
 
 rm(list=ls())
 library(ggplot2)
@@ -11,14 +11,12 @@ set.seed(123)
 n=1000                                      #Number of obs. per trial
 m=2000                                      #Number of simulated trials
 B=1000                                      #Number of perm. per trial
-smallB=60                                   #Number of perm. per trial for Besag-Clifford with small B
 mus=c(0.01,0.05,0.1,0.15,0.2,0.3,0.4,0.5)   #Strength of the alternative
 prop_treated=0.5                            #Probability of obs. being treated
 alpha=0.05                                  #Individual significance level
 c=alpha*0.90                                #Parameter for binomial mixture strategy
 p_zero=1/ceiling(sqrt(2*pi*exp(1/6))/alpha) #Parameter for binomial strategy
 h_bc=alpha*B                                #Parameter for Besag Clifford
-h_bc_smallB=alpha*smallB                    #Parameter for Besag Clifford with small B
 
 
 
@@ -27,7 +25,6 @@ power_bin=rep(0,length(mus))        #Binomial strategy
 power_bin_r=rep(0,length(mus))      #Randomized binomial strategy
 power_agg=rep(0,length(mus))        #Aggressive strategy
 power_bc=rep(0,length(mus))         #Besag-Clifford strategy
-power_bc_smallB=rep(0,length(mus))  #Besag-Clifford strategy with smallB
 power_cal=rep(0,length(mus))        #Calibrated strategy 1
 power_cal_2=rep(0,length(mus))      #Calibrated strategy 2
 power_bm=rep(0,length(mus))         #Binomial mixture strategy
@@ -37,10 +34,6 @@ power_bm_r=rep(0,length(mus))       #Randomized binomial mixture strategy
 nPerm_bc=rep(0,length(mus))
 nPerm_rej_bc=rep(0,length(mus))
 nPerm_stop_bc=rep(0,length(mus))
-
-nPerm_bc_smallB=rep(0,length(mus))
-nPerm_rej_bc_smallB=rep(0,length(mus))
-nPerm_stop_bc_smallB=rep(0,length(mus))
 
 nPerm_cal=rep(0,length(mus))
 nPerm_rej_cal=rep(0,length(mus))
@@ -70,9 +63,6 @@ for(mu in mus){
 
 idx_dec_bc=rep(B,m)
 dec_bc=rep(0,m)
-
-idx_dec_bc_smallB=rep(smallB,m)
-dec_bc_smallB=rep(0,m)
 
 idx_dec_cal=rep(B,m)
 dec_cal=rep(0,m)
@@ -118,7 +108,6 @@ wealth_cal=c(1)
 wealth_cal_2=c(1)
 wealth_bm=c()
 bc_count=1
-bc_count_smallB=1
 
 for(i in 1:B){
   X_perm=sample(X)                                                #Permute data
@@ -161,16 +150,6 @@ for(i in 1:B){
   }else if(i==B & bc_count==1){
     idx_dec_bc[j]=i
     dec_bc[j]=1
-  } 
-  
-  if((rank-1)==h_bc_smallB & bc_count_smallB==1 & i<smallB){
-    dec_bc_smallB[j]=-1
-    idx_dec_bc_smallB[j]=i
-    bc_count_smallB=0
-  }else if(i==smallB & bc_count_smallB==1 & bc_count_smallB==1){
-    idx_dec_bc_smallB[j]=i
-    dec_bc_smallB[j]=1
-    bc_count_smallB=0
   } 
   
   wealth_bm[i]=(1-pbinom(rank-1,i+1,c))/c
@@ -260,7 +239,6 @@ if(wealth_cal_2[idx_dec_cal_2[j]]>=(1/alpha)){
 power_bin[counter]=mean((dec_bin>0))
 power_bin_r[counter]=mean((dec_bin_r>0))
 power_bc[counter]=mean((dec_bc>0))
-power_bc_smallB[counter]=mean((dec_bc_smallB>0))
 power_agg[counter]=mean((dec_agg>0))
 power_bm[counter]=mean((dec_bm>0))
 power_bm_r[counter]=mean((dec_bm_r>0))
@@ -274,10 +252,6 @@ nPerm_stop[counter]=mean(idx_dec[which(dec_bin==-1)])
 nPerm_bc[counter]=mean(idx_dec_bc)
 nPerm_rej_bc[counter]=mean(idx_dec_bc[which(dec_bc==1)])
 nPerm_stop_bc[counter]=mean(idx_dec_bc[which(dec_bc==-1)])
-
-nPerm_bc_smallB[counter]=mean(idx_dec_bc_smallB)
-nPerm_rej_bc_smallB[counter]=mean(idx_dec_bc_smallB[which(dec_bc_smallB==1)])
-nPerm_stop_bc_smallB[counter]=mean(idx_dec_bc_smallB[which(dec_bc_smallB==-1)])
 
 nPerm_agg[counter]=mean(idx_dec_agg)
 nPerm_agg_rej[counter]=mean(idx_dec_agg[which(dec_agg==1)])
@@ -299,11 +273,10 @@ nPerm_stop_cal_2[counter]=mean(idx_dec_cal_2[which(dec_cal_2==-1)])
 counter=counter+1
 }
 
-save(power_bin, power_bin_r,power_bc, power_agg, power_bm,power_bm_r,power_cal, power_cal_2, power_bc_smallB,
+save(power_bin, power_bin_r,power_bc, power_agg, power_bm,power_bm_r,power_cal, power_cal_2, 
      nPerm,nPerm_rej, nPerm_stop, nPerm_bc, nPerm_rej_bc, nPerm_stop_bc,
      nPerm_agg, nPerm_agg_rej, nPerm_agg_stop, nPerm_bm, nPerm_bm_rej, nPerm_bm_stop,
      nPerm_cal, nPerm_rej_cal, nPerm_stop_cal, nPerm_cal_2, nPerm_rej_cal_2, nPerm_stop_cal_2, 
-     nPerm_bc_smallB, nPerm_rej_bc_smallB, nPerm_stop_bc_smallB,
      file = "results/power_alpha005.rda")
 
 
@@ -314,14 +287,12 @@ save(power_bin, power_bin_r,power_bc, power_agg, power_bm,power_bm_r,power_cal, 
 n=1000                                      #Number of obs. per trial
 m=2000                                      #Number of simulated trials
 B=1000                                      #Number of perm. per trial
-smallB=300                                  #Number of perm. per trial for Besag-Clifford with small B
 mus=c(0.01,0.05,0.1,0.15,0.2,0.3,0.4,0.5)   #Strength of the alternative
 prop_treated=0.5                            #Probability of obs. being treated
 alpha=0.01                                  #Individual significance level
 c=alpha*0.90                                #Parameter for binomial mixture strategy
 p_zero=1/ceiling(sqrt(2*pi*exp(1/6))/alpha) #Parameter for binomial strategy
 h_bc=alpha*B                                #Parameter for Besag Clifford
-h_bc_smallB=alpha*smallB                    #Parameter for Besag Clifford with small B
 
 
 
@@ -330,7 +301,6 @@ power_bin=rep(0,length(mus))        #Binomial strategy
 power_bin_r=rep(0,length(mus))      #Randomized binomial strategy
 power_agg=rep(0,length(mus))        #Aggressive strategy
 power_bc=rep(0,length(mus))         #Besag-Clifford strategy
-power_bc_smallB=rep(0,length(mus))  #Besag-Clifford strategy with smallB
 power_cal=rep(0,length(mus))        #Calibrated strategy 1
 power_cal_2=rep(0,length(mus))      #Calibrated strategy 2
 power_bm=rep(0,length(mus))         #Binomial mixture strategy
@@ -340,10 +310,6 @@ power_bm_r=rep(0,length(mus))       #Randomized binomial mixture strategy
 nPerm_bc=rep(0,length(mus))
 nPerm_rej_bc=rep(0,length(mus))
 nPerm_stop_bc=rep(0,length(mus))
-
-nPerm_bc_smallB=rep(0,length(mus))
-nPerm_rej_bc_smallB=rep(0,length(mus))
-nPerm_stop_bc_smallB=rep(0,length(mus))
 
 nPerm_cal=rep(0,length(mus))
 nPerm_rej_cal=rep(0,length(mus))
@@ -373,9 +339,6 @@ for(mu in mus){
   
   idx_dec_bc=rep(B,m)
   dec_bc=rep(0,m)
-  
-  idx_dec_bc_smallB=rep(smallB,m)
-  dec_bc_smallB=rep(0,m)
   
   idx_dec_cal=rep(B,m)
   dec_cal=rep(0,m)
@@ -421,7 +384,6 @@ for(mu in mus){
     wealth_cal_2=c(1)
     wealth_bm=c()
     bc_count=1
-    bc_count_smallB=1
     
     for(i in 1:B){
       X_perm=sample(X)                                                #Permute data
@@ -464,16 +426,6 @@ for(mu in mus){
       }else if(i==B & bc_count==1){
         idx_dec_bc[j]=i
         dec_bc[j]=1
-      } 
-      
-      if((rank-1)==h_bc_smallB & bc_count_smallB==1 & i<smallB){
-        dec_bc_smallB[j]=-1
-        idx_dec_bc_smallB[j]=i
-        bc_count_smallB=0
-      }else if(i==smallB & bc_count_smallB==1 & bc_count_smallB==1){
-        idx_dec_bc_smallB[j]=i
-        dec_bc_smallB[j]=1
-        bc_count_smallB=0
       } 
       
       wealth_bm[i]=(1-pbinom(rank-1,i+1,c))/c
@@ -563,7 +515,6 @@ for(mu in mus){
   power_bin[counter]=mean((dec_bin>0))
   power_bin_r[counter]=mean((dec_bin_r>0))
   power_bc[counter]=mean((dec_bc>0))
-  power_bc_smallB[counter]=mean((dec_bc_smallB>0))
   power_agg[counter]=mean((dec_agg>0))
   power_bm[counter]=mean((dec_bm>0))
   power_bm_r[counter]=mean((dec_bm_r>0))
@@ -577,10 +528,6 @@ for(mu in mus){
   nPerm_bc[counter]=mean(idx_dec_bc)
   nPerm_rej_bc[counter]=mean(idx_dec_bc[which(dec_bc==1)])
   nPerm_stop_bc[counter]=mean(idx_dec_bc[which(dec_bc==-1)])
-  
-  nPerm_bc_smallB[counter]=mean(idx_dec_bc_smallB)
-  nPerm_rej_bc_smallB[counter]=mean(idx_dec_bc_smallB[which(dec_bc_smallB==1)])
-  nPerm_stop_bc_smallB[counter]=mean(idx_dec_bc_smallB[which(dec_bc_smallB==-1)])
   
   nPerm_agg[counter]=mean(idx_dec_agg)
   nPerm_agg_rej[counter]=mean(idx_dec_agg[which(dec_agg==1)])
@@ -602,11 +549,10 @@ for(mu in mus){
   counter=counter+1
 }
 
-save(power_bin, power_bin_r,power_bc, power_agg, power_bm,power_bm_r,power_cal, power_cal_2, power_bc_smallB,
+save(power_bin, power_bin_r,power_bc, power_agg, power_bm,power_bm_r,power_cal, power_cal_2, 
      nPerm,nPerm_rej, nPerm_stop, nPerm_bc, nPerm_rej_bc, nPerm_stop_bc,
      nPerm_agg, nPerm_agg_rej, nPerm_agg_stop, nPerm_bm, nPerm_bm_rej, nPerm_bm_stop,
      nPerm_cal, nPerm_rej_cal, nPerm_stop_cal, nPerm_cal_2, nPerm_rej_cal_2, nPerm_stop_cal_2, 
-     nPerm_bc_smallB, nPerm_rej_bc_smallB, nPerm_stop_bc_smallB,
      file = "results/power_alpha001.rda")
 
 
