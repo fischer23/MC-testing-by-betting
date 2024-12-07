@@ -4,14 +4,14 @@ This repository contains the R code for reproducing the results in the paper "Se
 
 Files:
 
-Power_nperm_generate_data.R: Calculates the power and number of permutations required for reproducing the plots in Figures 2,3,4,5,6 and saves them in the result folder
+Power_nperm_generate_data.R: Calculates the power and number of permutations required for reproducing the plots in Figures 2,3,4,5 and saves them in the result folder
                              (files "power_alpha005.rda" and "power_alpha001.rda"). 
 
 Pval_generate_data.R:        Calculates the p-values required for reproducing the plots in Figures 1 and 8 and saves them in the result folder
                              (files "pval_alpha001_mu001.rda", "pval_alpha001_mu01.rda", "pval_alpha001_mu1.rda", "pval_alpha005_mu001.rda", "pval_alpha005_mu01.rda",     
                              "pval_alpha005_mu1.rda").
 
-Plot_generator.R:            Uses the .rda files created by "Power_nperm_generate_data.R" and "Pval_generate_data.R" to generate Figures 1,2,3,4,5,6,8.
+Plot_generator.R:            Uses the .rda files created by "Power_nperm_generate_data.R" and "Pval_generate_data.R" to generate Figures 1,2,3,4,5,7.
 
 Real_data_Fisher_sharp.R:    Real data analysis described in Section 7.4. Generates plots for Figure 6 and saves them in the result folder (files "Plot_wealth_upper.pdf" and                               "plot_wealth_lower.pdf"). The same data was analyzed by Rosenbaum (2002) and Ding (2017).
 
