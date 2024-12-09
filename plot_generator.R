@@ -685,7 +685,7 @@ p3=ggplot(results_df, aes(idx)) +
 combined <-  p3 + p1 + p2 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
 ggsave("results/Plot_logp_alpha001.pdf", plot=combined, width=15, height=5 )
 
-#####Figure 8 (comparison to beta prior)
+#####Figure 7 (comparison to beta prior)
 
 load("results/pval_alpha005_mu01.rda")
 
