@@ -20,6 +20,8 @@ Real_data_CRT.R:             Real data analysis described in Section 7.5. The pa
 
 Results folder:              Contains the above mentioned .rda files and all plots shown in the paper.
 
+Appendix folder:             Contains the additional simulations provided in Appendix F of the paper.
+
 Multiple testing folder:     Contains the code for the follow up paper "Multiple testing with anytime-valid Monte-Carlo p-values".
 
 ### References for the real data analyses
