@@ -187,4 +187,4 @@ for(i in 1:length(dists)){
 results_df=as_tibble(melt(results_arr))
 names(results_df)=c("mus", "alphas", "ns", "labs", "types", "c_factors", "dists", "values")
 
-save(results_df, file = "results/appendix/power_appendix.rda")
+save(results_df, file = "appendix/results/power_appendix.rda")
