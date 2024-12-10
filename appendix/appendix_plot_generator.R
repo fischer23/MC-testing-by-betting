@@ -5,7 +5,7 @@ rm(list=ls())
 library(ggplot2)
 library(patchwork)
 
-load("results/appendix/power_appendix.rda")
+load("appendix/results/power_appendix.rda")
 
 col=c("orange", "cornflowerblue")
 shapes=c(1, 8)
@@ -565,4 +565,4 @@ p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df
 
 combined = p1 + p2 + p3 + p4 + plot_layout(guides = "collect", ncol = 2) & theme(legend.position = "bottom")
 
-ggsave("results/appendix/plot_c0.99.pdf", plot=combined, width=12, height=7.5)
+ggsave("appendix/results/plot_c0.99.pdf", plot=combined, width=12, height=7.5)
