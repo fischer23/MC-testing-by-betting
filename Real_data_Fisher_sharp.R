@@ -1,5 +1,5 @@
-#Reproduces the results of Section 7.4 in the paper "Sequential Monte-Carlo testing by betting"
-#In particular, generates plots for Figure 6.
+#Reproduces the results of Section 7.3 in the paper "Sequential Monte-Carlo testing by betting"
+#In particular, generates plots for Figure S.10.
 
 rm(list=ls())
 library(ggplot2)
@@ -146,7 +146,7 @@ median(idx_dec_bc)
 p1=(myplots[[m]]+myplots[[5]] & theme(legend.position = "bottom"))+plot_layout(guides="collect")
 p2=(myplots[[m-2]]+myplots[[m-4]] & theme(legend.position = "bottom"))+plot_layout(guides="collect")
 
-###Generates plots for Figure 6 of the paper.
+###Generates plots for Figure S.10 of the paper.
 ggsave("results/Plot_wealth_upper.pdf",plot=p1, width=12, height=4.5)
 ggsave("results/Plot_wealth_lower.pdf",plot=p2, width=12, height=4.5)
 
