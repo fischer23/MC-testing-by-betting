@@ -1,4 +1,4 @@
-#Reproduces the results of Section 7.5 in the paper "Sequential Monte-Carlo testing by betting"
+#Reproduces the results of Section 7.4 in the paper "Sequential Monte-Carlo testing by betting"
 
 
 rm(list=ls())
