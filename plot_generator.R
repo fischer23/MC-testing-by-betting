@@ -1,14 +1,11 @@
-#Generates Figures 1,2,3,4,5,7 of the paper "Sequential Monte-Carlo testing by betting"
+#Generates Figures 1,2,3,4 of the paper "Sequential Monte-Carlo testing by betting"
 
 rm(list=ls())
 
 library(ggplot2)
 library(patchwork)
 
-
-#######################Plots power and number of permutations
-
-#####Figure 2 (alpha=0.05)
+#####Figure 1 (alpha=0.05)
 
 load("results/power_alpha005.rda")
 B=1000
@@ -125,7 +122,7 @@ combined <- p1 + p2 + p3 + p4 + plot_layout(guides = "collect") & theme(legend.p
 
 ggsave("results/Plot_power_alpha005.pdf",plot=combined, width=12, height=7.5)
 
-#####Figure 3 (alpha=0.01)
+#####Figure 2 (alpha=0.01)
 
 load("results/power_alpha001.rda")
 B=1000
@@ -242,7 +239,7 @@ combined <- p1 + p2 + p3 + p4 + plot_layout(guides = "collect") & theme(legend.p
 ggsave("results/Plot_power_alpha001.pdf",plot=combined, width=12, height=7.5)
 
 
-#####Figure 4 (Comparison randomized vs. non-randomized binomial and binomial mixture strategy)
+#####Figure 3 (Comparison randomized vs. non-randomized binomial and binomial mixture strategy)
 
 ###For alpha=0.05
 
@@ -378,7 +375,7 @@ ggsave("results/Plot_power_randomized_b.pdf",plot=combined_b, width=12, height=4
 ggsave("results/Plot_power_randomized_bm.pdf",plot=combined_bm, width=12, height=4.5)
 
 
-#####Figure 5 (Besag-Clifford vs. randomized strategies)
+#####Figure 4 (Besag-Clifford vs. randomized strategies)
 
 ###For alpha=0.05
 
@@ -455,328 +452,6 @@ combined <- p1 + p2 + plot_layout(guides = "collect") & theme(legend.position = 
 ggsave("results/Plot_power_randomized.pdf",plot=combined, width=12, height=4.5)
 
 
-
-#######################Plots with logarithmic p-values
-
-#####Figure 1
-
-#For alpha=0.05
-
-load("results/pval_alpha005_mu01.rda")
-
-font_size=15
-mu=0.1
-alpha=0.05
-m=2000
-
-lab=c("Permutation p-value", "Binomial mixture", "Binomial", "Besag Clifford", "Aggressive" )
-col=c("cornflowerblue", "orange", "limegreen", "cornflowerblue", "red")
-
-
-results_df=data.frame(idx=(1:m),p_perm=sort(log(p_perm)), p_bm=sort(log(p_bm)),
-                      p_bin=sort(log(p_bin)), p_agg=sort(log(p_agg)))
-
-p1=ggplot(results_df, aes(idx)) + 
-  geom_line(aes(y = p_perm,colour = "1",linewidth = "1")) +
-  geom_line(aes(y = p_bin,colour = "3",linewidth = "3")) +
-  geom_line(aes(y = p_agg, colour = "5", linewidth = "5")) +
-  geom_line(aes(y = p_bm, colour = "2", linewidth = "2")) +
-  geom_hline(yintercept=log(alpha),linewidth=1, colour="darkgrey")+
-  scale_linewidth_manual(name  ="Strategy",values=c("1"=1,"3"=1, "5"=1, "2"=1), 
-                         labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  scale_colour_manual(name="Strategy", values=c("1"=col[1],  "3"=col[3],"5"=col[5],"2"=col[2]), 
-                      labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  xlab("Index")+
-  ylab("Log-transformed p-values")+
-  scale_x_continuous(breaks = seq(100,1900,200), limits=c(0,2000),expand = c(0, 0))+
-  scale_y_continuous(breaks = (-6:0), limits=c(-7,0),expand = c(0, 0))+
-  ggtitle(bquote(mu==.(mu)))+
-  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=font_size), axis.title.x = element_text(size=font_size), title = element_text(size=font_size),
-        legend.text=element_text(size=font_size), legend.title=element_text(size=font_size))
-
-
-load("results/pval_alpha005_mu1.rda")
-
-mu=1
-alpha=0.05
-m=2000
-
-lab=c("Permutation p-value", "Binomial mixture", "Binomial", "Besag Clifford", "Aggressive" )
-col=c("cornflowerblue", "orange", "limegreen", "cornflowerblue", "red")
-
-
-results_df=data.frame(idx=(1:m),p_perm=sort(log(p_perm)), p_bm=sort(log(p_bm)),
-                      p_bin=sort(log(p_bin)), p_agg=sort(log(p_agg)))
-
-p2=ggplot(results_df, aes(idx)) + 
-  geom_line(aes(y = p_perm,colour = "1",linewidth = "1")) +
-  geom_line(aes(y = p_bin,colour = "3",linewidth = "3")) +
-  geom_line(aes(y = p_agg, colour = "5", linewidth = "5")) +
-  geom_line(aes(y = p_bm, colour = "2", linewidth = "2")) +
-  geom_hline(yintercept=log(alpha),linewidth=1, colour="darkgrey")+
-  scale_linewidth_manual(name  ="Strategy",values=c("1"=1,"3"=1, "5"=1, "2"=1), 
-                         labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  scale_colour_manual(name="Strategy", values=c("1"=col[1],  "3"=col[3],"5"=col[5],"2"=col[2]), 
-                      labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  xlab("Index")+
-  ylab("Log-transformed p-values")+
-  scale_x_continuous(breaks = seq(100,1900,200), limits=c(0,2000),expand = c(0, 0))+
-  scale_y_continuous(breaks = (-6:0), limits=c(-7,0),expand = c(0, 0))+
-  ggtitle(bquote(mu==.(mu)))+
-  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=font_size), axis.title.x = element_text(size=font_size),title = element_text(size=font_size),
-        legend.text=element_text(size=font_size), legend.title=element_text(size=font_size))
-
-
-load("results/pval_alpha005_mu001.rda")
-
-mu=0.01
-alpha=0.05
-m=2000
-
-lab=c("Permutation p-value", "Binomial mixture", "Binomial",  "Besag Clifford", "Aggressive" )
-col=c("cornflowerblue", "orange", "limegreen",  "green", "red")
-
-
-results_df=data.frame(idx=(1:m),p_perm=sort(log(p_perm)), p_bm=sort(log(p_bm)),
-                      p_bin=sort(log(p_bin)), p_agg=sort(log(p_agg)))
-
-p3=ggplot(results_df, aes(idx)) + 
-  geom_line(aes(y = p_perm,colour = "1",linewidth = "1")) +
-  geom_line(aes(y = p_bin,colour = "3",linewidth = "3")) +
-  geom_line(aes(y = p_agg, colour = "5", linewidth = "5")) +
-  geom_line(aes(y = p_bm, colour = "2", linewidth = "2")) +
-  geom_hline(yintercept=log(alpha),linewidth=1, colour="darkgrey")+
-  scale_linewidth_manual(name  ="Strategy",values=c("1"=1,"3"=1, "5"=1, "2"=1), 
-                         labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  scale_colour_manual(name="Strategy", values=c("1"=col[1],  "3"=col[3],"5"=col[5],"2"=col[2]), 
-                      labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  xlab("Index")+
-  ylab("Log-transformed p-values")+
-  scale_x_continuous(breaks = seq(100,1900,200), limits=c(0,2000),expand = c(0, 0))+
-  scale_y_continuous(breaks = (-6:0), limits=c(-7,0),expand = c(0, 0))+
-  ggtitle(bquote(mu==.(mu)))+
-  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=font_size), axis.title.x = element_text(size=font_size),title = element_text(size=font_size),
-        legend.text=element_text(size=font_size), legend.title=element_text(size=font_size))
-
-
-
-combined <-  p3 + p1 + p2 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
-ggsave("results/Plot_logp_alpha005.pdf", plot=combined, width=15, height=5 )
-
-
-#For alpha=0.01
-
-load("results/pval_alpha001_mu01.rda")
-
-font_size=15
-mu=0.1
-alpha=0.01
-m=2000
-
-lab=c("Permutation p-value", "Binomial mixture", "Binomial", "Besag Clifford", "Aggressive" )
-col=c("cornflowerblue", "orange", "limegreen", "cornflowerblue", "red")
-
-
-results_df=data.frame(idx=(1:m),p_perm=sort(log(p_perm)), p_bm=sort(log(p_bm)),
-                      p_bin=sort(log(p_bin)), p_agg=sort(log(p_agg)))
-
-p1=ggplot(results_df, aes(idx)) + 
-  geom_line(aes(y = p_perm,colour = "1",linewidth = "1")) +
-  geom_line(aes(y = p_bin,colour = "3",linewidth = "3")) +
-  geom_line(aes(y = p_agg, colour = "5", linewidth = "5")) +
-  geom_line(aes(y = p_bm, colour = "2", linewidth = "2")) +
-  geom_hline(yintercept=log(alpha),linewidth=1, colour="darkgrey")+
-  scale_linewidth_manual(name  ="Strategy",values=c("1"=1,"3"=1, "5"=1, "2"=1), 
-                         labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  scale_colour_manual(name="Strategy", values=c("1"=col[1],  "3"=col[3],"5"=col[5],"2"=col[2]), 
-                      labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  xlab("Index")+
-  ylab("Log-transformed p-values")+
-  scale_x_continuous(breaks = seq(100,1900,200), limits=c(0,2000),expand = c(0, 0))+
-  scale_y_continuous(breaks = (-6:0), limits=c(-7,0),expand = c(0, 0))+
-  ggtitle(bquote(mu==.(mu)))+
-  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=font_size), axis.title.x = element_text(size=font_size), title = element_text(size=font_size),
-        legend.text=element_text(size=font_size), legend.title=element_text(size=font_size))
-
-
-load("results/pval_alpha001_mu1.rda")
-
-mu=1
-alpha=0.01
-m=2000
-
-lab=c("Permutation p-value", "Binomial mixture", "Binomial", "Besag Clifford", "Aggressive" )
-col=c("cornflowerblue", "orange", "limegreen", "cornflowerblue", "red")
-
-
-results_df=data.frame(idx=(1:m),p_perm=sort(log(p_perm)), p_bm=sort(log(p_bm)),
-                      p_bin=sort(log(p_bin)), p_agg=sort(log(p_agg)))
-
-p2=ggplot(results_df, aes(idx)) + 
-  geom_line(aes(y = p_perm,colour = "1",linewidth = "1")) +
-  geom_line(aes(y = p_bin,colour = "3",linewidth = "3")) +
-  geom_line(aes(y = p_agg, colour = "5", linewidth = "5")) +
-  geom_line(aes(y = p_bm, colour = "2", linewidth = "2")) +
-  geom_hline(yintercept=log(alpha),linewidth=1, colour="darkgrey")+
-  scale_linewidth_manual(name  ="Strategy",values=c("1"=1,"3"=1, "5"=1, "2"=1), 
-                         labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  scale_colour_manual(name="Strategy", values=c("1"=col[1],  "3"=col[3],"5"=col[5],"2"=col[2]), 
-                      labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  xlab("Index")+
-  ylab("Log-transformed p-values")+
-  scale_x_continuous(breaks = seq(100,1900,200), limits=c(0,2000),expand = c(0, 0))+
-  scale_y_continuous(breaks = (-6:0), limits=c(-7,0),expand = c(0, 0))+
-  ggtitle(bquote(mu==.(mu)))+
-  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=font_size), axis.title.x = element_text(size=font_size),title = element_text(size=font_size),
-        legend.text=element_text(size=font_size), legend.title=element_text(size=font_size))
-
-
-load("results/pval_alpha001_mu001.rda")
-
-mu=0.01
-alpha=0.01
-m=2000
-
-lab=c("Permutation p-value", "Binomial mixture", "Binomial",  "Besag Clifford", "Aggressive" )
-col=c("cornflowerblue", "orange", "limegreen",  "green", "red")
-
-
-results_df=data.frame(idx=(1:m),p_perm=sort(log(p_perm)), p_bm=sort(log(p_bm)),
-                      p_bin=sort(log(p_bin)), p_agg=sort(log(p_agg)))
-
-p3=ggplot(results_df, aes(idx)) + 
-  geom_line(aes(y = p_perm,colour = "1",linewidth = "1")) +
-  geom_line(aes(y = p_bin,colour = "3",linewidth = "3")) +
-  geom_line(aes(y = p_agg, colour = "5", linewidth = "5")) +
-  geom_line(aes(y = p_bm, colour = "2", linewidth = "2")) +
-  geom_hline(yintercept=log(alpha),linewidth=1, colour="darkgrey")+
-  scale_linewidth_manual(name  ="Strategy",values=c("1"=1,"3"=1, "5"=1, "2"=1), 
-                         labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  scale_colour_manual(name="Strategy", values=c("1"=col[1],  "3"=col[3],"5"=col[5],"2"=col[2]), 
-                      labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2]))+
-  xlab("Index")+
-  ylab("Log-transformed p-values")+
-  scale_x_continuous(breaks = seq(100,1900,200), limits=c(0,2000),expand = c(0, 0))+
-  scale_y_continuous(breaks = (-6:0), limits=c(-7,0),expand = c(0, 0))+
-  ggtitle(bquote(mu==.(mu)))+
-  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=font_size), axis.title.x = element_text(size=font_size),title = element_text(size=font_size),
-        legend.text=element_text(size=font_size), legend.title=element_text(size=font_size))
-
-
-
-combined <-  p3 + p1 + p2 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
-ggsave("results/Plot_logp_alpha001.pdf", plot=combined, width=15, height=5 )
-
-#####Figure 7 (comparison to beta prior)
-
-load("results/pval_alpha005_mu01.rda")
-
-b1=50
-b2=100
-b3=200
-alpha=0.05
-
-lab=c("Permutation p-value", "Binomial mixture (uniform prior)", "Binomial",  "Besag Clifford", "Aggressive", "Binomial mixture (beta prior)")
-col=c("cornflowerblue", "orange", "limegreen", "cornflowerblue", "red", "purple")
-
-
-results_df=data.frame(idx=(1:m),p_perm=sort(log(p_perm)), p_bm=sort(log(p_bm)), 
-                      p_bin=sort(log(p_bin)), p_agg=sort(log(p_agg)), p_bm_beta=sort(log(p_bm_beta_b1)))
-
-p1=ggplot(results_df, aes(idx)) + 
-  geom_line(aes(y = p_perm,colour = "1",linewidth = "1")) +
-  geom_line(aes(y = p_bin,colour = "3",linewidth = "3")) +
-  geom_line(aes(y = p_agg, colour = "5", linewidth = "5")) +
-  geom_line(aes(y = p_bm, colour = "2", linewidth = "2")) +
-  geom_line(aes(y = p_bm_beta, colour = "6", linewidth = "6")) +
-  geom_hline(yintercept=log(alpha),linewidth=1, colour="darkgrey")+
-  scale_linewidth_manual(name  ="Strategy",values=c("1"=1,"3"=1, "5"=1, "2"=1, "6"=1), 
-                         labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2],"6"=lab[6]))+
-  scale_colour_manual(name="Strategy", values=c("1"=col[1],  "3"=col[3],"5"=col[5],"2"=col[2],"6"=col[6]), 
-                      labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2],"6"=lab[6]))+
-  xlab("Index")+
-  ylab("Log-transformed p-values")+
-  scale_x_continuous(breaks = seq(100,1900,200), limits=c(0,2000),expand = c(0, 0))+
-  scale_y_continuous(breaks = (-6:0), limits=c(-7,0),expand = c(0, 0))+
-  ggtitle(bquote(b==.(b1)))+
-  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
-
-
-results_df=data.frame(idx=(1:m),p_perm=sort(log(p_perm)), p_bm=sort(log(p_bm)), 
-                      p_bin=sort(log(p_bin)), p_agg=sort(log(p_agg)), p_bm_beta=sort(log(p_bm_beta_b2)))
-
-p2=ggplot(results_df, aes(idx)) + 
-  geom_line(aes(y = p_perm,colour = "1",linewidth = "1")) +
-  geom_line(aes(y = p_bin,colour = "3",linewidth = "3")) +
-  geom_line(aes(y = p_agg, colour = "5", linewidth = "5")) +
-  geom_line(aes(y = p_bm, colour = "2", linewidth = "2")) +
-  geom_line(aes(y = p_bm_beta, colour = "6", linewidth = "6")) +
-  geom_hline(yintercept=log(alpha),linewidth=1, colour="darkgrey")+
-  scale_linewidth_manual(name  ="Strategy",values=c("1"=1,"3"=1, "5"=1, "2"=1, "6"=1), 
-                         labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2],"6"=lab[6]))+
-  scale_colour_manual(name="Strategy", values=c("1"=col[1],  "3"=col[3],"5"=col[5],"2"=col[2],"6"=col[6]), 
-                      labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2],"6"=lab[6]))+
-  xlab("Index")+
-  ylab("Log-transformed p-values")+
-  scale_x_continuous(breaks = seq(100,1900,200), limits=c(0,2000),expand = c(0, 0))+
-  scale_y_continuous(breaks = (-6:0), limits=c(-7,0),expand = c(0, 0))+
-  ggtitle(bquote(b==.(b2)))+
-  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
-
-
-results_df=data.frame(idx=(1:m),p_perm=sort(log(p_perm)), p_bm=sort(log(p_bm)), 
-                      p_bin=sort(log(p_bin)), p_agg=sort(log(p_agg)), p_bm_beta=sort(log(p_bm_beta_b3)))
-
-p3=ggplot(results_df, aes(idx)) + 
-  geom_line(aes(y = p_perm,colour = "1",linewidth = "1")) +
-  geom_line(aes(y = p_bin,colour = "3",linewidth = "3")) +
-  geom_line(aes(y = p_agg, colour = "5", linewidth = "5")) +
-  geom_line(aes(y = p_bm, colour = "2", linewidth = "2")) +
-  geom_line(aes(y = p_bm_beta, colour = "6", linewidth = "6")) +
-  geom_hline(yintercept=log(alpha),linewidth=1, colour="darkgrey")+
-  scale_linewidth_manual(name  ="Strategy",values=c("1"=1,"3"=1, "5"=1, "2"=1, "6"=1), 
-                         labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2],"6"=lab[6]))+
-  scale_colour_manual(name="Strategy", values=c("1"=col[1],  "3"=col[3],"5"=col[5],"2"=col[2],"6"=col[6]), 
-                      labels=c("1"=lab[1], "3"=lab[3],"5"=lab[5],"2"=lab[2],"6"=lab[6]))+
-  xlab("Index")+
-  ylab("Log-transformed p-values")+
-  scale_x_continuous(breaks = seq(100,1900,200), limits=c(0,2000),expand = c(0, 0))+
-  scale_y_continuous(breaks = (-6:0), limits=c(-7,0),expand = c(0, 0))+
-  ggtitle(bquote(b==.(b3)))+
-  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
-
-combined <-  p1 + p2 + p3 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
-ggsave("results/Plot_alpha_005_beta.pdf", plot=combined, width=15, height=5)
 
 
 
