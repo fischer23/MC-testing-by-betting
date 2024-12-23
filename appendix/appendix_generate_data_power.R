@@ -1,4 +1,4 @@
-#R Code for generating the data of the Figures 8 - 14 in the paper "Sequential Monte-Carlo testing by betting"
+#R Code for generating the data of the Figures S.3 - S.9 in the paper "Sequential Monte-Carlo testing by betting"
 
 rm(list=ls())
 library(ggplot2)
