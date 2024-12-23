@@ -24,12 +24,12 @@ results_df_1_nperm_long=pivot_longer(data=results_df_1_nperm, cols=nperm_mean_bm
 results_df_1_long=left_join(results_df_1_power_long, results_df_1_nperm_long, by = c("idx_1" = "idx_1", "Strategy" = "Strategy"))  
 
 results_df_1_long$Strategy=as.factor(results_df_1_long$Strategy)
-levels(results_df_1_long$Strategy)=c("Aggressive", "AMT", "Anytime-valid BC", "Permutation p-value", "Permutation p-value (B=200)", "Binomial mixture")
+levels(results_df_1_long$Strategy)=c("Aggressive (ours)", "AMT", "Anytime-valid BC (ours)", "Permutation p-value", "Permutation p-value (B=200)", "Binomial mixture (ours)")
 
 
-cols=c( "Permutation p-value"="cornflowerblue", "Permutation p-value (B=200)"="purple", "Aggressive"="red", "Anytime-valid BC"="limegreen", 
-        "Binomial mixture"="orange", "AMT"="aquamarine")
-shapes=c( "Permutation p-value"=6, "Permutation p-value (B=200)"=3, "Aggressive"=0, "Anytime-valid BC"=8, "Binomial mixture"=1, "AMT"=4)
+cols=c( "Permutation p-value"="cornflowerblue", "Permutation p-value (B=200)"="purple", "Aggressive (ours)"="red", "Anytime-valid BC (ours)"="limegreen", 
+        "Binomial mixture (ours)"="orange", "AMT"="aquamarine")
+shapes=c( "Permutation p-value"=6, "Permutation p-value (B=200)"=3, "Aggressive (ours)"=0, "Anytime-valid BC (ours)"=8, "Binomial mixture (ours)"=1, "AMT"=4)
 
 p1=ggplot(results_df_1_long, aes(x=idx_1, y=power)) + 
   geom_line(aes(colour = Strategy)) +
@@ -94,7 +94,7 @@ results_df_2_nperm_long=pivot_longer(data=results_df_2_nperm, cols=nperm_mean_bm
 results_df_2_long=left_join(results_df_2_power_long, results_df_2_nperm_long, by = c("idx_2" = "idx_2", "Strategy" = "Strategy"))  
 
 results_df_2_long$Strategy=as.factor(results_df_2_long$Strategy)
-levels(results_df_2_long$Strategy)=c("Aggressive", "AMT", "Anytime-valid BC", "Permutation p-value", "Permutation p-value (B=200)", "Binomial mixture")
+levels(results_df_2_long$Strategy)=c("Aggressive (ours)", "AMT", "Anytime-valid BC (ours)", "Permutation p-value", "Permutation p-value (B=200)", "Binomial mixture (ours)")
 
 p3=ggplot(results_df_2_long, aes(x=idx_2, y=power)) + 
   geom_line(aes(colour = Strategy)) +
@@ -158,7 +158,7 @@ results_df_3_nperm_long=pivot_longer(data=results_df_3_nperm, cols=nperm_mean_bm
 results_df_3_long=left_join(results_df_3_power_long, results_df_3_nperm_long, by = c("idx_3" = "idx_3", "Strategy" = "Strategy"))  
 
 results_df_3_long$Strategy=as.factor(results_df_3_long$Strategy)
-levels(results_df_3_long$Strategy)=c("Aggressive", "AMT", "Anytime-valid BC", "Permutation p-value", "Permutation p-value (B=200)", "Binomial mixture")
+levels(results_df_3_long$Strategy)=c("Aggressive (ours)", "AMT", "Anytime-valid BC (ours)", "Permutation p-value", "Permutation p-value (B=200)", "Binomial mixture (ours)")
 
 
 p5=ggplot(results_df_3_long, aes(x=idx_3, y=power)) + 
@@ -224,7 +224,7 @@ results_df_4_nperm_long=pivot_longer(data=results_df_4_nperm, cols=nperm_mean_bm
 results_df_4_long=left_join(results_df_4_power_long, results_df_4_nperm_long, by = c("idx_4" = "idx_4", "Strategy" = "Strategy"))  
 
 results_df_4_long$Strategy=as.factor(results_df_4_long$Strategy)
-levels(results_df_4_long$Strategy)=c("Aggressive", "AMT", "Anytime-valid BC", "Permutation p-value", "Permutation p-value (B=200)", "Binomial mixture")
+levels(results_df_4_long$Strategy)=c("Aggressive (ours)", "AMT", "Anytime-valid BC (ours)", "Permutation p-value", "Permutation p-value (B=200)", "Binomial mixture (ours)")
 
 
 p7=ggplot(results_df_4_long, aes(x=idx_4, y=power)) + 
@@ -232,7 +232,7 @@ p7=ggplot(results_df_4_long, aes(x=idx_4, y=power)) +
   geom_point(aes(colour = Strategy, shape = Strategy)) +
   geom_text_repel(data=dplyr::filter(results_df_4_long, idx_4==10000),
                   aes(colour = Strategy, label = Strategy, x=idx_4, y=power, segment.square = TRUE, segment.inflect = TRUE),
-                  segment.colour="darkgrey", force=1, nudge_x=1, direction = "y", segment.size = 0.1, segment.curvature = -0.001,
+                  segment.colour="darkgrey", force=3, nudge_x=1, direction = "y", segment.size = 0.1, segment.curvature = -0.001,
                   max.overlaps = Inf, min.segment.length = 0) +
   scale_shape_manual(values=shapes)+
   scale_colour_manual(values=cols)+
@@ -290,7 +290,7 @@ ggsave("results/Plot_power_all.pdf",plot=combined, width=14, height=18)
 #####Different rhos
 load("results/Plot_FDR_rhos.rda")
 
-lab=c("Aggressive", "Anytime-valid BC", "Permutation p-value", "Permutation p-value (B=200)", "Binomial mixture")
+lab=c("Aggressive (ours)", "Anytime-valid BC (ours)", "Permutation p-value", "Permutation p-value (B=200)", "Binomial mixture (ours)")
 col=c("cornflowerblue", "purple", "red", "limegreen", "orange", "aquamarine")
 
 
@@ -329,7 +329,7 @@ ggsave("results/Plot_power_rhos.pdf",plot=p9, width=9, height=4)
 load("results/Plot_FDR_standard.rda")
 
 
-lab=c("Perm p-value", "Perm p-value (B=200)", "Aggressive", "Anytime-valid BC", "Binomial mixture") 
+lab=c("Perm p-value", "Perm p-value (B=200)", "Aggressive", "Anytime-valid BC (ours)", "Binomial mixture (ours)") 
 col=c( "cornflowerblue", "purple", "red", "limegreen", "orange")
 
 results_df=data.frame(stops=c(result_bm[[1]]$stop[result_bm[[1]]$rejects],result_bc[[1]]$stop[result_bc[[1]]$rejects]),
