@@ -25,8 +25,6 @@ power_bin=rep(0,length(mus))        #Binomial strategy
 power_bin_r=rep(0,length(mus))      #Randomized binomial strategy
 power_agg=rep(0,length(mus))        #Aggressive strategy
 power_bc=rep(0,length(mus))         #Besag-Clifford strategy
-power_cal=rep(0,length(mus))        #Calibrated strategy 1
-power_cal_2=rep(0,length(mus))      #Calibrated strategy 2
 power_bm=rep(0,length(mus))         #Binomial mixture strategy
 power_bm_r=rep(0,length(mus))       #Randomized binomial mixture strategy
 
@@ -34,14 +32,6 @@ power_bm_r=rep(0,length(mus))       #Randomized binomial mixture strategy
 nPerm_bc=rep(0,length(mus))
 nPerm_rej_bc=rep(0,length(mus))
 nPerm_stop_bc=rep(0,length(mus))
-
-nPerm_cal=rep(0,length(mus))
-nPerm_rej_cal=rep(0,length(mus))
-nPerm_stop_cal=rep(0,length(mus))
-
-nPerm_cal_2=rep(0,length(mus))
-nPerm_rej_cal_2=rep(0,length(mus))
-nPerm_stop_cal_2=rep(0,length(mus))
 
 nPerm=rep(0,length(mus))
 nPerm_rej=rep(0,length(mus))
@@ -63,12 +53,6 @@ for(mu in mus){
 
 idx_dec_bc=rep(B,m)
 dec_bc=rep(0,m)
-
-idx_dec_cal=rep(B,m)
-dec_cal=rep(0,m)
-
-idx_dec_cal_2=rep(B,m)
-dec_cal_2=rep(0,m)
 
 idx_dec=rep(B,m)
 dec_bin=rep(0,m)
@@ -96,16 +80,12 @@ test_stat_perm=c()                              #Permuted test statistics
 #Betting vectors
 bet_bin=c()
 bet_agg=c()
-bet_cal=c()
-bet_cal_2=c()
 
 rank=1          #Rank of the observed test statistic
 
 #Wealth vectors
 wealth_bin=c(1)
 wealth_agg=c(1)
-wealth_cal=c(1)
-wealth_cal_2=c(1)
 wealth_bm=c()
 bc_count=1
 
@@ -156,19 +136,7 @@ for(i in 1:B){
   if(((min(wealth_bm)<=alpha & i>1) | max(wealth_bm)>(1/alpha))&idx_dec_bm[j]==B){
     idx_dec_bm[j]=i
   }
-  
-  test_stat_comp=c(test_stat,test_stat_perm[1:(i-1)])  
-  bet_cal[i]=(i+1)/(sum(1/(1:(i+1)))*(sum(test_stat_perm[i]>=test_stat_comp)+1))
-  wealth_cal=cumprod(bet_cal)
-  if((min(wealth_cal)<=alpha | max(wealth_cal)>(1/alpha))&idx_dec_cal[j]==B){
-    idx_dec_cal[j]=i
-  }
-  
-  bet_cal_2[i]=(i+1)/(sum(1/sqrt((1:(i+1))))*(sqrt(sum(test_stat_perm[i]>=test_stat_comp)+1)))
-  wealth_cal_2=cumprod(bet_cal_2)
-  if((min(wealth_cal_2)<=alpha | max(wealth_cal_2)>(1/alpha))&idx_dec_cal_2[j]==B){
-    idx_dec_cal_2[j]=i
-  }
+ 
 }
 
 #dec=1 -> rejected, dec=-1 -> stopped for futility, dec=0 -> accepted but did not stop earlier
@@ -217,23 +185,6 @@ if(wealth_bm[idx_dec_bm[j]]>=(runif(1)/alpha)){
 }
 
 
-if(wealth_cal[idx_dec_cal[j]]>=(1/alpha)){
-  dec_cal[j]=1
-}else if(wealth_cal[idx_dec_cal[j]]<alpha){
-  dec_cal[j]=-1
-}else{
-  dec_cal[j]=0 
-}
-
-
-if(wealth_cal_2[idx_dec_cal_2[j]]>=(1/alpha)){
-  dec_cal_2[j]=1
-}else if(wealth_cal_2[idx_dec_cal_2[j]]<alpha){
-  dec_cal_2[j]=-1
-}else{
-  dec_cal_2[j]=0 
-}
-
 }
 
 power_bin[counter]=mean((dec_bin>0))
@@ -242,8 +193,6 @@ power_bc[counter]=mean((dec_bc>0))
 power_agg[counter]=mean((dec_agg>0))
 power_bm[counter]=mean((dec_bm>0))
 power_bm_r[counter]=mean((dec_bm_r>0))
-power_cal[counter]=mean((dec_cal>0))
-power_cal_2[counter]=mean((dec_cal_2>0))
 
 nPerm[counter]=mean(idx_dec)
 nPerm_rej[counter]=mean(idx_dec[which(dec_bin==1)])
@@ -261,22 +210,13 @@ nPerm_bm[counter]=mean(idx_dec_bm)
 nPerm_bm_rej[counter]=mean(idx_dec_bm[which(dec_bm==1)])
 nPerm_bm_stop[counter]=mean(idx_dec_bm[which(dec_bm==-1)])
 
-nPerm_cal[counter]=mean(idx_dec_cal)
-nPerm_rej_cal[counter]=mean(idx_dec_cal[which(dec_cal==1)])
-nPerm_stop_cal[counter]=mean(idx_dec_cal[which(dec_cal==-1)])
-
-nPerm_cal_2[counter]=mean(idx_dec_cal_2)
-nPerm_rej_cal_2[counter]=mean(idx_dec_cal_2[which(dec_cal_2==1)])
-nPerm_stop_cal_2[counter]=mean(idx_dec_cal_2[which(dec_cal_2==-1)])
-
 
 counter=counter+1
 }
 
-save(power_bin, power_bin_r,power_bc, power_agg, power_bm,power_bm_r,power_cal, power_cal_2, 
+save(power_bin, power_bin_r,power_bc, power_agg, power_bm,power_bm_r,
      nPerm,nPerm_rej, nPerm_stop, nPerm_bc, nPerm_rej_bc, nPerm_stop_bc,
-     nPerm_agg, nPerm_agg_rej, nPerm_agg_stop, nPerm_bm, nPerm_bm_rej, nPerm_bm_stop,
-     nPerm_cal, nPerm_rej_cal, nPerm_stop_cal, nPerm_cal_2, nPerm_rej_cal_2, nPerm_stop_cal_2, 
+     nPerm_agg, nPerm_agg_rej, nPerm_agg_stop, nPerm_bm, nPerm_bm_rej, nPerm_bm_stop, 
      file = "results/power_alpha005.rda")
 
 
@@ -301,8 +241,6 @@ power_bin=rep(0,length(mus))        #Binomial strategy
 power_bin_r=rep(0,length(mus))      #Randomized binomial strategy
 power_agg=rep(0,length(mus))        #Aggressive strategy
 power_bc=rep(0,length(mus))         #Besag-Clifford strategy
-power_cal=rep(0,length(mus))        #Calibrated strategy 1
-power_cal_2=rep(0,length(mus))      #Calibrated strategy 2
 power_bm=rep(0,length(mus))         #Binomial mixture strategy
 power_bm_r=rep(0,length(mus))       #Randomized binomial mixture strategy
 
@@ -310,14 +248,6 @@ power_bm_r=rep(0,length(mus))       #Randomized binomial mixture strategy
 nPerm_bc=rep(0,length(mus))
 nPerm_rej_bc=rep(0,length(mus))
 nPerm_stop_bc=rep(0,length(mus))
-
-nPerm_cal=rep(0,length(mus))
-nPerm_rej_cal=rep(0,length(mus))
-nPerm_stop_cal=rep(0,length(mus))
-
-nPerm_cal_2=rep(0,length(mus))
-nPerm_rej_cal_2=rep(0,length(mus))
-nPerm_stop_cal_2=rep(0,length(mus))
 
 nPerm=rep(0,length(mus))
 nPerm_rej=rep(0,length(mus))
@@ -339,12 +269,6 @@ for(mu in mus){
   
   idx_dec_bc=rep(B,m)
   dec_bc=rep(0,m)
-  
-  idx_dec_cal=rep(B,m)
-  dec_cal=rep(0,m)
-  
-  idx_dec_cal_2=rep(B,m)
-  dec_cal_2=rep(0,m)
   
   idx_dec=rep(B,m)
   dec_bin=rep(0,m)
@@ -372,16 +296,12 @@ for(mu in mus){
     #Betting vectors
     bet_bin=c()
     bet_agg=c()
-    bet_cal=c()
-    bet_cal_2=c()
     
     rank=1          #Rank of the observed test statistic
     
     #Wealth vectors
     wealth_bin=c(1)
     wealth_agg=c(1)
-    wealth_cal=c(1)
-    wealth_cal_2=c(1)
     wealth_bm=c()
     bc_count=1
     
@@ -431,20 +351,7 @@ for(mu in mus){
       wealth_bm[i]=(1-pbinom(rank-1,i+1,c))/c
       if(((min(wealth_bm)<=alpha & i>1) | max(wealth_bm)>(1/alpha))&idx_dec_bm[j]==B){
         idx_dec_bm[j]=i
-      }
-      
-      test_stat_comp=c(test_stat,test_stat_perm[1:(i-1)])  
-      bet_cal[i]=(i+1)/(sum(1/(1:(i+1)))*(sum(test_stat_perm[i]>=test_stat_comp)+1))
-      wealth_cal=cumprod(bet_cal)
-      if((min(wealth_cal)<=alpha | max(wealth_cal)>(1/alpha))&idx_dec_cal[j]==B){
-        idx_dec_cal[j]=i
-      }
-      
-      bet_cal_2[i]=(i+1)/(sum(1/sqrt((1:(i+1))))*(sqrt(sum(test_stat_perm[i]>=test_stat_comp)+1)))
-      wealth_cal_2=cumprod(bet_cal_2)
-      if((min(wealth_cal_2)<=alpha | max(wealth_cal_2)>(1/alpha))&idx_dec_cal_2[j]==B){
-        idx_dec_cal_2[j]=i
-      }
+      } 
     }
     
     #dec=1 -> rejected, dec=-1 -> stopped for futility, dec=0 -> accepted but did not stop earlier
@@ -492,24 +399,6 @@ for(mu in mus){
       dec_bm_r[j]=0 
     }
     
-    
-    if(wealth_cal[idx_dec_cal[j]]>=(1/alpha)){
-      dec_cal[j]=1
-    }else if(wealth_cal[idx_dec_cal[j]]<alpha){
-      dec_cal[j]=-1
-    }else{
-      dec_cal[j]=0 
-    }
-    
-    
-    if(wealth_cal_2[idx_dec_cal_2[j]]>=(1/alpha)){
-      dec_cal_2[j]=1
-    }else if(wealth_cal_2[idx_dec_cal_2[j]]<alpha){
-      dec_cal_2[j]=-1
-    }else{
-      dec_cal_2[j]=0 
-    }
-    
   }
   
   power_bin[counter]=mean((dec_bin>0))
@@ -518,8 +407,6 @@ for(mu in mus){
   power_agg[counter]=mean((dec_agg>0))
   power_bm[counter]=mean((dec_bm>0))
   power_bm_r[counter]=mean((dec_bm_r>0))
-  power_cal[counter]=mean((dec_cal>0))
-  power_cal_2[counter]=mean((dec_cal_2>0))
   
   nPerm[counter]=mean(idx_dec)
   nPerm_rej[counter]=mean(idx_dec[which(dec_bin==1)])
@@ -537,22 +424,13 @@ for(mu in mus){
   nPerm_bm_rej[counter]=mean(idx_dec_bm[which(dec_bm==1)])
   nPerm_bm_stop[counter]=mean(idx_dec_bm[which(dec_bm==-1)])
   
-  nPerm_cal[counter]=mean(idx_dec_cal)
-  nPerm_rej_cal[counter]=mean(idx_dec_cal[which(dec_cal==1)])
-  nPerm_stop_cal[counter]=mean(idx_dec_cal[which(dec_cal==-1)])
-  
-  nPerm_cal_2[counter]=mean(idx_dec_cal_2)
-  nPerm_rej_cal_2[counter]=mean(idx_dec_cal_2[which(dec_cal_2==1)])
-  nPerm_stop_cal_2[counter]=mean(idx_dec_cal_2[which(dec_cal_2==-1)])
-  
   
   counter=counter+1
 }
 
-save(power_bin, power_bin_r,power_bc, power_agg, power_bm,power_bm_r,power_cal, power_cal_2, 
+save(power_bin, power_bin_r,power_bc, power_agg, power_bm,power_bm_r, 
      nPerm,nPerm_rej, nPerm_stop, nPerm_bc, nPerm_rej_bc, nPerm_stop_bc,
      nPerm_agg, nPerm_agg_rej, nPerm_agg_stop, nPerm_bm, nPerm_bm_rej, nPerm_bm_stop,
-     nPerm_cal, nPerm_rej_cal, nPerm_stop_cal, nPerm_cal_2, nPerm_rej_cal_2, nPerm_stop_cal_2, 
      file = "results/power_alpha001.rda")
 
 
