@@ -28,8 +28,9 @@ p1=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==100 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==100 & results_df$c_factors==0.9 & 
@@ -47,8 +48,9 @@ p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==100 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==100 & results_df$c_factors==0.9 & 
                         results_df$dists=="normal" & results_df$types=="Power"),], aes(x=mus, y=values)) + 
@@ -64,8 +66,9 @@ p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==100 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==100 & results_df$c_factors==0.9 & 
@@ -83,8 +86,9 @@ p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==100 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 combined = p1 + p2 + p3 + p4 + plot_layout(guides = "collect", ncol = 2) & theme(legend.position = "bottom")
@@ -108,8 +112,9 @@ p1=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==200 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==200 & results_df$c_factors==0.9 & 
@@ -127,8 +132,9 @@ p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==200 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==200 & results_df$c_factors==0.9 & 
                         results_df$dists=="normal" & results_df$types=="Power"),], aes(x=mus, y=values)) + 
@@ -144,8 +150,9 @@ p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==200 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==200 & results_df$c_factors==0.9 & 
@@ -163,8 +170,9 @@ p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==200 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 combined = p1 + p2 + p3 + p4 + plot_layout(guides = "collect", ncol = 2) & theme(legend.position = "bottom")
@@ -187,8 +195,9 @@ p1=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==500 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==500 & results_df$c_factors==0.9 & 
@@ -206,8 +215,9 @@ p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==500 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==500 & results_df$c_factors==0.9 & 
                         results_df$dists=="normal" & results_df$types=="Power"),], aes(x=mus, y=values)) + 
@@ -223,8 +233,9 @@ p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==500 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==500 & results_df$c_factors==0.9 & 
@@ -242,8 +253,9 @@ p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==500 & results_df$
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 combined = p1 + p2 + p3 + p4 + plot_layout(guides = "collect", ncol = 2) & theme(legend.position = "bottom")
@@ -266,8 +278,9 @@ p1=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==2000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==2000 & results_df$c_factors==0.9 & 
@@ -285,8 +298,9 @@ p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==2000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==2000 & results_df$c_factors==0.9 & 
                         results_df$dists=="normal" & results_df$types=="Power"),], aes(x=mus, y=values)) + 
@@ -302,8 +316,9 @@ p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==2000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==2000 & results_df$c_factors==0.9 & 
@@ -321,8 +336,9 @@ p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==2000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 combined = p1 + p2 + p3 + p4 + plot_layout(guides = "collect", ncol = 2) & theme(legend.position = "bottom")
@@ -345,8 +361,9 @@ p1=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==1000 & results_df$c_factors==0.9 & 
@@ -364,8 +381,9 @@ p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df$c_factors==0.9 & 
                         results_df$dists=="log-normal" & results_df$types=="Power"),], aes(x=mus, y=values)) + 
@@ -381,8 +399,9 @@ p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df$c_factors==0.9 & 
@@ -400,8 +419,9 @@ p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 combined = p1 + p2 + p3 + p4 + plot_layout(guides = "collect", ncol = 2) & theme(legend.position = "bottom")
@@ -425,8 +445,9 @@ p1=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==1000 & results_df$c_factors==0.8 & 
@@ -444,8 +465,9 @@ p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df$c_factors==0.8 & 
                         results_df$dists=="normal" & results_df$types=="Power"),], aes(x=mus, y=values)) + 
@@ -461,8 +483,9 @@ p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df$c_factors==0.8 & 
@@ -480,8 +503,9 @@ p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 combined = p1 + p2 + p3 + p4 + plot_layout(guides = "collect", ncol = 2) & theme(legend.position = "bottom")
@@ -504,8 +528,9 @@ p1=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==1000 & results_df$c_factors==0.99 & 
@@ -523,8 +548,9 @@ p2=ggplot(results_df[(results_df$alphas==0.05 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df$c_factors==0.99 & 
                         results_df$dists=="normal" & results_df$types=="Power"),], aes(x=mus, y=values)) + 
@@ -540,8 +566,9 @@ p3=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df$c_factors==0.99 & 
@@ -559,8 +586,9 @@ p4=ggplot(results_df[(results_df$alphas==0.01 & results_df$ns==1000 & results_df
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 combined = p1 + p2 + p3 + p4 + plot_layout(guides = "collect", ncol = 2) & theme(legend.position = "bottom")
