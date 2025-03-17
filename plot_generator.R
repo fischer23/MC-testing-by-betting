@@ -273,8 +273,9 @@ p1=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        legend.text=element_text(size=18), legend.title=element_text(size=18),
+        title=element_text(size=16)) 
 
 ##Binomial strategy
 lab=c( "Binomial", "Binomial randomized") 
@@ -301,8 +302,9 @@ p2=ggplot(results_df_2, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15))
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        legend.text=element_text(size=18), legend.title=element_text(size=18),
+        title=element_text(size=16))
 
 
 ###For alpha=0.01
@@ -336,8 +338,9 @@ p3=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        legend.text=element_text(size=18), legend.title=element_text(size=18),
+        title=element_text(size=16)) 
 
 ##Binomial strategy
 lab=c( "Binomial", "Binomial randomized") 
@@ -364,15 +367,17 @@ p4=ggplot(results_df_2, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15))
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        legend.text=element_text(size=18), legend.title=element_text(size=18),
+        title=element_text(size=16))
 
 
 combined_b <- p2 + p4 + plot_layout(guides = "collect")  & theme(legend.position = "bottom")
 combined_bm <- p1 +  p3 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
 
-ggsave("results/Plot_power_randomized_b.pdf",plot=combined_b, width=12, height=4.5)
-ggsave("results/Plot_power_randomized_bm.pdf",plot=combined_bm, width=12, height=4.5)
+combined=combined_b / combined_bm
+
+ggsave("results/Plot_power_randomized_comb.pdf",plot=combined, width=12, height=9)
 
 
 #####Figure 4 (Besag-Clifford vs. randomized strategies)
