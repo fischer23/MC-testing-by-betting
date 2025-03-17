@@ -41,8 +41,9 @@ p1=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p2=ggplot(results_df, aes(idx)) + 
@@ -66,8 +67,9 @@ p2=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p3=ggplot(results_df, aes(idx)) + 
@@ -91,8 +93,9 @@ p3=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15))
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18))
 
 p4=ggplot(results_df, aes(idx)) + 
   geom_line(aes(y = nPerm_stop,colour = "3", linetype="3")) +
@@ -115,8 +118,9 @@ p4=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15))
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18))
 
 combined <- p1 + p2 + p3 + p4 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
 
@@ -157,8 +161,9 @@ p1=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p2=ggplot(results_df, aes(idx)) + 
@@ -182,8 +187,9 @@ p2=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 p3=ggplot(results_df, aes(idx)) + 
@@ -207,8 +213,9 @@ p3=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15))
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18))
 
 p4=ggplot(results_df, aes(idx)) + 
   geom_line(aes(y = nPerm_stop,colour = "3", linetype="3")) +
@@ -231,8 +238,9 @@ p4=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15))
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18))
 
 combined <- p1 + p2 + p3 + p4 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
 
@@ -273,9 +281,9 @@ p1=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
-        legend.text=element_text(size=18), legend.title=element_text(size=18),
-        title=element_text(size=16)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18), title = element_text(size=15),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 ##Binomial strategy
 lab=c( "Binomial", "Binomial randomized") 
@@ -302,9 +310,9 @@ p2=ggplot(results_df_2, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
-        legend.text=element_text(size=18), legend.title=element_text(size=18),
-        title=element_text(size=16))
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18), title = element_text(size=15),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18))
 
 
 ###For alpha=0.01
@@ -338,9 +346,9 @@ p3=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
-        legend.text=element_text(size=18), legend.title=element_text(size=18),
-        title=element_text(size=16)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18), title = element_text(size=15),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 ##Binomial strategy
 lab=c( "Binomial", "Binomial randomized") 
@@ -367,9 +375,9 @@ p4=ggplot(results_df_2, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18),
-        legend.text=element_text(size=18), legend.title=element_text(size=18),
-        title=element_text(size=16))
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18), title = element_text(size=15),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18))
 
 
 combined_b <- p2 + p4 + plot_layout(guides = "collect")  & theme(legend.position = "bottom")
@@ -415,8 +423,9 @@ p1=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18), title = element_text(size=15),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 ###For alpha=0.01
@@ -448,8 +457,9 @@ p2=ggplot(results_df, aes(idx)) +
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA, size=1), 
-        axis.title.y = element_text(size=15), axis.title.x = element_text(size=15),
-        legend.text=element_text(size=15), legend.title=element_text(size=15)) 
+        axis.title.y = element_text(size=18), axis.title.x = element_text(size=18), title = element_text(size=15),
+        axis.text.y = element_text(size=12), axis.text.x = element_text(size=12),
+        legend.text=element_text(size=18), legend.title=element_text(size=18)) 
 
 
 combined <- p1 + p2 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
